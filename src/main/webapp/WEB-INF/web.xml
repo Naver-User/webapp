@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<web-app
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+  version="4.0">
+
+  <display-name>webapp</display-name>
+
+
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+<!-- 
+  1. Servlet Registration
+  <servlet>
+    <servlet-name>HelloServlet</servlet-name>
+    <servlet-class>org.zerock.myapp.HelloServlet</servlet-class>
+  </servlet>
+
+  2. URL 매핑 설정
+  <servlet-mapping>
+    <servlet-name>HelloServlet</servlet-name>
+    <url-pattern>/Hello</url-pattern>
+    <url-pattern>/Hello2</url-pattern>
+    <url-pattern>/myservlet/Hello3</url-pattern>
+  </servlet-mapping>
+-->
+
+  <servlet>
+    <servlet-name>InitParamServlet</servlet-name>
+    <servlet-class>org.zerock.myapp.InitParamServlet</servlet-class>
+
+    <init-param>
+      <param-name>PARAM1</param-name>
+      <param-value>VALUE1</param-value>
+    </init-param>
+    
+    <init-param>
+      <param-name>PARAM2</param-name>
+      <param-value>VALUE2</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>InitParamServlet</servlet-name>
+    <url-pattern>/InitParam</url-pattern>
+  </servlet-mapping>
+
+  <!-- JSP 파일을 서블릿처럼 수동등록 -->
+
+  <servlet>
+    <servlet-name>configJsp</servlet-name>
+    <jsp-file>/config.jsp</jsp-file>
+
+    <init-param>
+      <param-name>PARAM1</param-name>
+      <param-value>VALUE1</param-value>
+    </init-param>
+
+    <init-param>
+      <param-name>PARAM2</param-name>
+      <param-value>VALUE2</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>configJsp</servlet-name>
+    <url-pattern>/configJsp</url-pattern>
+  </servlet-mapping>
+
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error/404.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>500</error-code>
+    <location>/error/500.jsp</location>
+  </error-page>
+
+  <error-page>
+    <exception-type>java.lang.NullPointerException</exception-type>
+    <location>/error/nullPointer.jsp</location>
+  </error-page>
+
+
+
+
+
+  <context-param>
+    <param-name>CONTEXT_PARAM1</param-name>
+    <param-value>VALUE1</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>CONTEXT_PARAM2</param-name>
+    <param-value>VALUE2</param-value>
+  </context-param>
+
+  <listener>
+    <listener-class>org.zerock.myapp.listener.ContextListenerImpl</listener-class>    
+  </listener>
+
+
+<!--  
+  <filter>
+    <filter-name>MyFilter</filter-name>
+    <filter-class>org.zerock.myapp.filter.MyFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>MyFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+-->
+
+  <!-- 세션스코프(Session Scope, 브라우저마다 하나씩 할당되는 금고상자) Idle 타임아웃 -->
+  <session-config>
+    <session-timeout>10</session-timeout>
+  </session-config>
+
+
+</web-app>
